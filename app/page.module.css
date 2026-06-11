@@ -1,0 +1,209 @@
+.hero {
+  position: relative;
+  min-height: 92dvh;
+  display: flex;
+  align-items: center;
+  padding-top: calc(var(--nav-height) + var(--space-12));
+  padding-bottom: var(--space-20);
+  overflow: hidden;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.heroBadge { animation: fadeInUp 0.4s ease both; }
+
+.heroHeading {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--color-dark);
+  animation: fadeInUp 0.5s 0.1s ease both;
+}
+
+.heroHeading em {
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+.heroSub {
+  font-size: var(--text-lg);
+  color: var(--color-muted);
+  max-width: 560px;
+  line-height: 1.65;
+  animation: fadeInUp 0.5s 0.2s ease both;
+}
+
+.heroCtas {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  animation: fadeInUp 0.5s 0.3s ease both;
+}
+
+.heroNote {
+  font-size: var(--text-xs);
+  color: var(--color-muted-light);
+  animation: fadeInUp 0.5s 0.4s ease both;
+}
+
+/* Decorative blobs */
+.heroDecor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.decorCircle1 {
+  position: absolute;
+  right: -80px;
+  top: 10%;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(35 60% 86% / 50%) 0%, transparent 70%);
+  animation: fadeIn 1s ease both;
+}
+
+.decorCircle2 {
+  position: absolute;
+  right: 15%;
+  bottom: -120px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(0 34% 88% / 35%) 0%, transparent 70%);
+  animation: fadeIn 1.2s ease both;
+}
+
+/* Features */
+.features { background: var(--color-white); }
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-6);
+}
+
+.featureCard {
+  padding: var(--space-8) var(--space-6);
+  background: var(--glass-bg);
+}
+
+.featureIcon {
+  font-size: 2rem;
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+.featureTitle {
+  font-size: var(--text-xl);
+  font-family: var(--font-serif);
+  font-weight: 400;
+  margin-bottom: var(--space-3);
+}
+
+.featureDesc {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+/* How it works */
+.howItWorks { background: var(--color-surface); }
+
+.steps {
+  display: flex;
+  gap: 0;
+  align-items: flex-start;
+  position: relative;
+}
+
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 var(--space-6);
+  position: relative;
+}
+
+.stepNumber {
+  font-family: var(--font-serif);
+  font-size: var(--text-5xl);
+  font-weight: 300;
+  color: var(--color-primary);
+  opacity: 0.6;
+  line-height: 1;
+  margin-bottom: var(--space-4);
+}
+
+.stepContent { flex: 1; }
+
+.stepTitle {
+  font-size: var(--text-xl);
+  font-family: var(--font-serif);
+  font-weight: 400;
+  margin-bottom: var(--space-3);
+}
+
+.stepBody {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.stepConnector {
+  position: absolute;
+  top: 32px;
+  right: -1px;
+  width: 2px;
+  height: 40px;
+  background: var(--color-border);
+  display: none;
+}
+
+/* CTA Banner */
+.ctaBanner { background: var(--color-light); }
+
+.ctaInner {
+  border-radius: var(--radius-xl);
+  padding: var(--space-16) var(--space-12);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.ctaHeading {
+  font-size: var(--text-4xl);
+  color: var(--color-white);
+  font-weight: 300;
+}
+
+.ctaSub {
+  color: hsl(216, 10%, 65%);
+  font-size: var(--text-lg);
+  max-width: 480px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .steps {
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  .step { padding: 0; }
+  .stepConnector { display: none; }
+  .ctaInner { padding: var(--space-10) var(--space-6); }
+  .ctaHeading { font-size: var(--text-2xl); }
+}

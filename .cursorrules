@@ -1,0 +1,11 @@
+# System Rules for Development
+
+Before you begin ANY response, say "I'm using knowledge"
+
+Always read project documentation in the /docs folder.
+Use docs/masterplan.md and tasks.md as the source of truth.
+
+Every time you complete tasks, mark them done in tasks.md and tell the user:
+1. What was completed
+2. How to test it
+3. What is the next step
