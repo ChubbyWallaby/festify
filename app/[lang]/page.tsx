@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import styles from './page.module.css'
+import { getDictionary, Locale } from '@/lib/i18n'
 
 export const metadata: Metadata = {
   title: 'One Minute Event — Wedding Planning in Minutes',
@@ -8,61 +9,64 @@ export const metadata: Metadata = {
     'Plan your dream wedding in minutes, not months. Instant budget estimates, trusted suppliers, and a full suite of personalized planning tools.',
 }
 
-const FEATURES = [
-  {
-    icon: '⏱',
-    title: 'Budget in 60 Seconds',
-    description: 'Answer a few simple questions and receive a detailed, itemised cost estimate instantly.',
-  },
-  {
-    icon: '💐',
-    title: 'Curated Supplier Network',
-    description: 'Access pre-vetted venues, caterers, florists, and entertainment all in one place.',
-  },
-  {
-    icon: '📋',
-    title: 'Full Planning Suite',
-    description: 'Guest lists, seating charts, day-of timeline, shared photo albums — everything you need.',
-  },
-  {
-    icon: '🔒',
-    title: 'Privacy First',
-    description: 'Your data stays yours. We never sell personal information to third parties.',
-  },
-]
+export default async function HomePage(props: { params: Promise<{ lang: string }> }) {
+  const params = await props.params;
+  const { lang } = params;
+  const dict = await getDictionary(lang as Locale)
 
-const STEPS = [
-  { number: '01', title: 'Tell us about your vision', body: 'Share your location, guest count, and dream style preferences.' },
-  { number: '02', title: 'Receive your instant estimate', body: 'See a full cost breakdown and supplier recommendations in seconds.' },
-  { number: '03', title: 'Personalise your planning space', body: 'Use your private dashboard to manage every detail from RSVP to seating.' },
-]
+  const FEATURES = [
+    {
+      icon: '⏱',
+      title: dict.home.feature1_title,
+      description: dict.home.feature1_desc,
+    },
+    {
+      icon: '💐',
+      title: dict.home.feature2_title,
+      description: dict.home.feature2_desc,
+    },
+    {
+      icon: '📋',
+      title: dict.home.feature3_title,
+      description: dict.home.feature3_desc,
+    },
+    {
+      icon: '🔒',
+      title: dict.home.feature4_title,
+      description: dict.home.feature4_desc,
+    },
+  ]
 
-export default function HomePage() {
+  const STEPS = [
+    { number: '01', title: dict.home.step1_title, body: dict.home.step1_desc },
+    { number: '02', title: dict.home.step2_title, body: dict.home.step2_desc },
+    { number: '03', title: dict.home.step3_title, body: dict.home.step3_desc },
+  ]
+
   return (
     <>
       {/* Hero */}
       <section className={`bg-gradient-hero ${styles.hero}`} aria-labelledby="hero-heading">
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.heroBadge}>
-            <span className="badge badge-gold">✦ Wedding Planning, Reimagined</span>
+            <span className="badge badge-gold">{dict.home.badge}</span>
           </div>
           <h1 id="hero-heading" className={styles.heroHeading}>
-            Your perfect wedding,<br />
-            <em>planned in minutes</em>
+            {dict.home.title1}<br />
+            <em>{dict.home.title2}</em>
           </h1>
           <p className={styles.heroSub}>
-            Stop drowning in spreadsheets. Get an instant budget estimate, connect with trusted suppliers,
-            and manage every detail from one beautiful dashboard.
+            {dict.home.subtitle}
           </p>
           <div className={styles.heroCtas}>
-            <Link href="/calculator" className="btn btn-primary btn-lg" id="hero-cta-start">
-              Start Planning Free →
+            <Link href={`/${lang}/calculator`} className="btn btn-primary btn-lg" id="hero-cta-start">
+              {dict.home.cta1}
             </Link>
-            <Link href="/about" className="btn btn-outline btn-lg" id="hero-cta-learn">
-              Learn More
+            <Link href={`/${lang}/about`} className="btn btn-outline btn-lg" id="hero-cta-learn">
+              {dict.home.cta2}
             </Link>
           </div>
-          <p className={styles.heroNote}>No credit card required · Free forever for couples</p>
+          <p className={styles.heroNote}>{dict.home.note}</p>
         </div>
         <div className={styles.heroDecor} aria-hidden="true">
           <div className={styles.decorCircle1} />
@@ -75,9 +79,9 @@ export default function HomePage() {
         <div className="container">
           <div className="text-center" style={{ marginBottom: 'var(--space-12)' }}>
             <div className="gold-line" style={{ margin: '0 auto var(--space-4)' }} />
-            <h2 id="features-heading">Everything you need, nothing you don&apos;t</h2>
+            <h2 id="features-heading">{dict.home.features_title}</h2>
             <p style={{ marginTop: 'var(--space-4)', maxWidth: 560, margin: 'var(--space-4) auto 0' }}>
-              A modern platform built specifically for today&apos;s couples who value efficiency, transparency, and beauty.
+              {dict.home.features_subtitle}
             </p>
           </div>
 
@@ -98,7 +102,7 @@ export default function HomePage() {
         <div className="container">
           <div className="text-center" style={{ marginBottom: 'var(--space-12)' }}>
             <div className="gold-line" style={{ margin: '0 auto var(--space-4)' }} />
-            <h2 id="how-heading">How it works</h2>
+            <h2 id="how-heading">{dict.home.how_title}</h2>
           </div>
           <div className={styles.steps}>
             {STEPS.map((s, i) => (
@@ -120,13 +124,13 @@ export default function HomePage() {
         <div className="container">
           <div className={`bg-gradient-dark ${styles.ctaInner}`}>
             <h2 id="cta-heading" className={styles.ctaHeading}>
-              Ready to start planning?
+              {dict.home.banner_title}
             </h2>
             <p className={styles.ctaSub}>
-              Join hundreds of couples who planned their perfect day with One Minute Event.
+              {dict.home.banner_subtitle}
             </p>
-            <Link href="/calculator" className="btn btn-primary btn-lg" id="cta-banner-btn">
-              Get My Free Budget →
+            <Link href={`/${lang}/calculator`} className="btn btn-primary btn-lg" id="cta-banner-btn">
+              {dict.home.banner_cta}
             </Link>
           </div>
         </div>

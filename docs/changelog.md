@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased] — 2026-06-11
+## [Unreleased]
+
+### Added
+- Internationalization (i18n) support with dynamic `/[lang]/` routing
+- English (`en`) and Portuguese (`pt`) dictionary files
+- Locale detection middleware defaulting to Portuguese (`pt`)
+- Language toggle switch in `SiteNav` component
+
+## [Phase 2] — 2026-06-11
 
 ### Added
 - Created foundational Product Requirement Documents (PRDs):

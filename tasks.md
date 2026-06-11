@@ -28,7 +28,15 @@ This checklist is the source of truth for the implementation order of the One Mi
 - [x] Build the Pricing Engine (calculate totals using location, tier, and guest size)
 - [x] Build Step 6: Review Page (dynamic cost breakdown summary + SVG donut chart)
 
-## Phase 3: Firebase Integration & Submissions Flow
+## Phase 3 — Internationalization (i18n) ✅
+
+- [x] Restructure Next.js App Router for dynamic `[lang]` routing
+- [x] Implement locale detection and redirection middleware
+- [x] Set up JSON dictionaries for PT and EN
+- [x] Refactor Homepage and Calculator to use translated dictionaries
+- [x] Add Language Switcher to the Navigation bar
+
+## Phase 4 — Firebase Integration & Submissions Flow (NEXT)
 - [ ] Connect Firebase SDK (Auth and Firestore) to the React application
 - [ ] Implement Firebase Auth system (Email/Password & password-reset flow)
 - [ ] Build Lead Submission modal (collect Name, Email, Phone, Preferred Contact Method)

@@ -1,12 +1,17 @@
 import type { Metadata } from 'next'
 import CalculatorForm from '@/components/calculator/CalculatorForm'
+import { getDictionary, Locale } from '@/lib/i18n'
 
 export const metadata: Metadata = {
   title: 'Budget Calculator',
   description: 'Get your personalised wedding budget estimate in under 60 seconds.',
 }
 
-export default function CalculatorPage() {
+export default async function CalculatorPage(props: { params: Promise<{ lang: string }> }) {
+  const params = await props.params;
+  const { lang } = params;
+  const dict = await getDictionary(lang as Locale)
+
   return (
     <div
       className="bg-gradient-hero"
@@ -14,16 +19,16 @@ export default function CalculatorPage() {
     >
       <div className="container" style={{ maxWidth: 760, paddingBottom: 'var(--space-20)' }}>
         <div className="text-center" style={{ marginBottom: 'var(--space-12)' }}>
-          <span className="badge badge-gold">Interactive Calculator</span>
+          <span className="badge badge-gold">{dict.calculator.badge}</span>
           <h1 style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-3)' }}>
-            Let&apos;s plan your perfect wedding
+            {dict.calculator.title}
           </h1>
           <p style={{ color: 'var(--color-muted)', maxWidth: 520, margin: '0 auto' }}>
-            Answer a few quick questions and we&apos;ll generate a detailed, personalised budget instantly.
+            {dict.calculator.subtitle}
           </p>
         </div>
 
-        <CalculatorForm />
+        <CalculatorForm dict={dict.calculator} />
       </div>
     </div>
   )
