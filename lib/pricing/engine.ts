@@ -23,23 +23,38 @@ export interface QuestionnaireState {
   needsLighting: boolean | null;
   needsCatering: boolean | null;
   otherServices: ServiceType[];
+  clientInfo: {
+    name: string;
+    email: string;
+    phone: string;
+  };
 }
 
 export const initialQuestionnaireState: QuestionnaireState = {
   location: null,
   tier: 'standard',
   guestCount: null,
+  
   hasVenue: null,
   venueSetting: null,
   needsTent: null,
   tentType: null,
+
   cocktailFurniture: null,
   diningPartyFurniture: null,
+
   needsFlowers: null,
   flowerTypes: [],
+
   needsLighting: null,
   needsCatering: null,
   otherServices: [],
+
+  clientInfo: {
+    name: '',
+    email: '',
+    phone: '',
+  }
 };
 
 export interface CostBreakdown {

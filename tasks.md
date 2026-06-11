@@ -36,11 +36,11 @@ This checklist is the source of truth for the implementation order of the One Mi
 - [x] Refactor Homepage and Calculator to use translated dictionaries
 - [x] Add Language Switcher to the Navigation bar
 
-## Phase 4 — Firebase Integration & Submissions Flow (NEXT)
+## Phase 4 — Firebase Integration & Submissions Flow (IN PROGRESS)
 - [ ] Connect Firebase SDK (Auth and Firestore) to the React application
 - [ ] Implement Firebase Auth system (Email/Password & password-reset flow)
-- [ ] Build Lead Submission modal (collect Name, Email, Phone, Preferred Contact Method)
-- [ ] Write submission handler:
+- [x] Build Lead Submission modal (collect Name, Email, Phone) and send email via Resend
+- [ ] Save lead details securely in Firestore with proper Security Rules
   - [ ] Create `submissions` and `budgets` documents in Firestore on submit
   - [ ] Trigger deferred account registration (create placeholder account with email)
   - [ ] Automatically log user in and display credentials setup dashboard instructions

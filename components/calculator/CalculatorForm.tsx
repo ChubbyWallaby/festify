@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { 
   QuestionnaireState, initialQuestionnaireState, calculateBudget 
 } from '@/lib/pricing/engine';
@@ -9,20 +9,24 @@ import {
   FlowerType, ServiceType 
 } from '@/lib/data/mockPricing';
 import ReviewChart from './ReviewChart';
+import { submitLeadAction } from '@/app/actions/submit-lead';
 
 export default function CalculatorForm({ dict }: { dict: any }) {
   const STEPS = [
-    { id: 1, title: dict.steps.step1 },
-    { id: 2, title: dict.steps.step2 },
-    { id: 3, title: dict.steps.step3 },
-    { id: 4, title: dict.steps.step4 },
-    { id: 5, title: dict.steps.step5 },
-    { id: 6, title: dict.steps.step6 },
+    { id: 1, title: dict.steps?.step1 || "Step 1" },
+    { id: 2, title: dict.steps?.step2 || "Step 2" },
+    { id: 3, title: dict.steps?.step3 || "Step 3" },
+    { id: 4, title: dict.steps?.step4 || "Step 4" },
+    { id: 5, title: dict.steps?.step5 || "Step 5" },
+    { id: 6, title: dict.steps?.step6 || "Step 6" },
+    { id: 7, title: dict.steps?.step7 || "Step 7" },
   ];
 
   const [currentStep, setCurrentStep] = useState(1);
   const [state, setState] = useState<QuestionnaireState>(initialQuestionnaireState);
   const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const updateState = (updates: Partial<QuestionnaireState>) => {
     setState(prev => ({ ...prev, ...updates }));
@@ -304,8 +308,8 @@ export default function CalculatorForm({ dict }: { dict: any }) {
                     </div>
                   </div>
 
-                  <button className="btn btn-primary btn-lg w-full justify-center" onClick={() => alert('Quote submission modal coming in Phase 3!')}>
-                    {dict.getQuote}
+                  <button className="btn btn-primary btn-lg w-full justify-center" onClick={() => setCurrentStep(7)}>
+                    {dict.getQuote} →
                   </button>
                 </div>
               );
@@ -313,16 +317,88 @@ export default function CalculatorForm({ dict }: { dict: any }) {
           </div>
         )}
 
+        {/* Step 7: User Info (Lead Collection) */}
+        {currentStep === 7 && !isSuccess && (
+          <div className="animate-fade-in-up">
+            <h2 style={{ marginBottom: 'var(--space-2)' }}>{dict.step7_title}</h2>
+            <p style={{ color: 'var(--color-muted)', marginBottom: 'var(--space-8)' }}>
+              {dict.step7_subtitle}
+            </p>
+            
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+              <div>
+                <label className="label">{dict.nameLabel}</label>
+                <input 
+                  type="text" 
+                  className="input" 
+                  value={state.clientInfo.name} 
+                  onChange={e => updateState({ clientInfo: { ...state.clientInfo, name: e.target.value } })}
+                  placeholder="Maria & João"
+                />
+              </div>
+              <div>
+                <label className="label">{dict.emailLabel}</label>
+                <input 
+                  type="email" 
+                  className="input" 
+                  value={state.clientInfo.email} 
+                  onChange={e => updateState({ clientInfo: { ...state.clientInfo, email: e.target.value } })}
+                  placeholder="hello@couple.com"
+                />
+              </div>
+              <div>
+                <label className="label">{dict.phoneLabel}</label>
+                <input 
+                  type="tel" 
+                  className="input" 
+                  value={state.clientInfo.phone} 
+                  onChange={e => updateState({ clientInfo: { ...state.clientInfo, phone: e.target.value } })}
+                  placeholder="+351 912 345 678"
+                />
+              </div>
+
+              <button 
+                className="btn btn-primary btn-lg w-full justify-center" 
+                style={{ marginTop: 'var(--space-4)' }}
+                disabled={isPending || !state.clientInfo.name || !state.clientInfo.email || !state.clientInfo.phone}
+                onClick={() => {
+                  startTransition(async () => {
+                    const result = await submitLeadAction(state);
+                    if (result.success) {
+                      setIsSuccess(true);
+                    } else {
+                      setError(result.error || 'Failed to send email.');
+                    }
+                  });
+                }}
+              >
+                {isPending ? dict.submitting : dict.submitQuote}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Success State */}
+        {isSuccess && (
+          <div className="animate-fade-in-up text-center" style={{ padding: 'var(--space-8) 0' }}>
+            <div style={{ fontSize: '48px', marginBottom: 'var(--space-4)' }}>✨</div>
+            <h2 style={{ marginBottom: 'var(--space-2)' }}>{dict.successTitle}</h2>
+            <p style={{ color: 'var(--color-muted)' }}>{dict.successMessage}</p>
+          </div>
+        )}
+
         {/* Footer Actions */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 'var(--space-8)', borderTop: '1px solid var(--color-border-soft)', paddingTop: 'var(--space-6)' }}>
-          {currentStep > 1 ? (
-            <button className="btn btn-outline" onClick={handleBack}>{dict.back}</button>
-          ) : <div />}
-          
-          {currentStep < 6 && (
-             <button className="btn btn-primary" onClick={handleNext}>{dict.next}</button>
-          )}
-        </div>
+        {!isSuccess && (
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 'var(--space-8)', borderTop: '1px solid var(--color-border-soft)', paddingTop: 'var(--space-6)' }}>
+            {currentStep > 1 ? (
+              <button className="btn btn-outline" onClick={handleBack} disabled={isPending}>{dict.back}</button>
+            ) : <div />}
+            
+            {currentStep < 6 && (
+               <button className="btn btn-primary" onClick={handleNext}>{dict.next}</button>
+            )}
+          </div>
+        )}
 
       </div>
     </div>

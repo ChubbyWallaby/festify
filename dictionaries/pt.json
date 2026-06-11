@@ -90,9 +90,18 @@
     "step6_subtitle": "Baseado nas suas escolhas para um casamento de nível {tier} na zona de {location}.",
     "noCost": "Não foi gerado nenhum custo. Por favor, faça as suas seleções.",
     "grandTotal": "Total Estimado",
-    "getQuote": "Obter o Meu Orçamento →",
-    "back": "← Voltar",
-    "next": "Próximo Passo →"
+    "getQuote": "Obter a minha estimativa grátis",
+    "step7_title": "Último Passo! Para onde enviamos a sua estimativa?",
+    "step7_subtitle": "Partilhe os seus detalhes para receber o orçamento completo por e-mail e desbloquear o seu painel de controlo gratuito.",
+    "nameLabel": "Nome Completo",
+    "emailLabel": "Endereço de E-mail",
+    "phoneLabel": "Número de Telefone",
+    "submitQuote": "Enviar o meu Orçamento",
+    "submitting": "A Enviar...",
+    "successTitle": "A sua estimativa está a caminho!",
+    "successMessage": "Verifique a sua caixa de entrada em breve.",
+    "back": "Voltar",
+    "next": "Próximo Passo"
   },
   "labels": {
     "venue": "Espaço",

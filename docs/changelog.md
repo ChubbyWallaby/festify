@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
+- Lead Submission Step (Step 7) in the Calculator to collect user details (Name, Email, Phone)
+- Resend API integration via Next.js Server Action (`submit-lead.ts`) to email the lead's estimate and details
 - Internationalization (i18n) support with dynamic `/[lang]/` routing
 - English (`en`) and Portuguese (`pt`) dictionary files
 - Locale detection middleware defaulting to Portuguese (`pt`)

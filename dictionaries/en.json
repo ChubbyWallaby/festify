@@ -90,9 +90,18 @@
     "step6_subtitle": "Based on your selections for a {tier} tier wedding in {location}.",
     "noCost": "No cost generated. Please make selections.",
     "grandTotal": "Grand Total",
-    "getQuote": "Get My Quote →",
-    "back": "← Back",
-    "next": "Next Step →"
+    "getQuote": "Get my free estimate",
+    "step7_title": "Last Step! Where should we send your estimate?",
+    "step7_subtitle": "Share your details to receive the full budget via email and unlock your free dashboard.",
+    "nameLabel": "Full Name",
+    "emailLabel": "Email Address",
+    "phoneLabel": "Phone Number",
+    "submitQuote": "Send My Quote",
+    "submitting": "Sending...",
+    "successTitle": "Your estimate is on its way!",
+    "successMessage": "Check your inbox shortly.",
+    "back": "Back",
+    "next": "Next Step"
   },
   "labels": {
     "venue": "Venue",
